@@ -1,1 +1,19 @@
-# SistemaInventario
+LIBROS
+ ID
+ Titulo
+ Autor
+ Editorial
+ Año
+ Ubicación
+
+USE `inventario_casa`;
+CREATE TABLE IF NOT EXISTS `libros` (
+  `ID` int NOT NULL AUTO_INCREMENT,
+  `CODIGO` char(50) NOT NULL DEFAULT '0',
+  `TITULO` char(50) NOT NULL DEFAULT '0',
+  `AUTOR` char(50) NOT NULL DEFAULT '0',
+  `EDITORIAL` char(50) NOT NULL DEFAULT '0',
+  `AÑO` char(10) NOT NULL DEFAULT '0',
+  `UBICACION` char(50) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=188 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
