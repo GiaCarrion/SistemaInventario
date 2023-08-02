@@ -23,7 +23,7 @@ class Registro_funciones():
         registro = cursor.fetchall()
         return registro
     
-    def burcar(self, titulo):
+    def buscar(self, titulo):
         cur = self.conexion.cursor()
         sql = "SELECT * FROM libros WHERE TITULO = {}".format(titulo)
         cur.execute(sql)
