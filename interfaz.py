@@ -1,10 +1,13 @@
 import tkinter as tk
+from PIL import Image, ImageTk
 
 class PantallaPrincipal(tk.Tk):
     def __init__(self):
         super().__init__()
         self.title("Sistema de inventario de libros y películas")
-        self.geometry("400x300")
+        
+        # Maximizar la ventana principal (modo pantalla completa)
+        self.state('zoomed')
 
         self.create_widgets()
 
@@ -12,15 +15,30 @@ class PantallaPrincipal(tk.Tk):
         lbl_titulo = tk.Label(self, text="Selecciona una opción:")
         lbl_titulo.pack(pady=10)
 
-        #Cargar imágenes para los botones
+        # Frame para contener los botones
+        frame_botones = tk.Frame(self)
+        frame_botones.pack(side=tk.TOP, pady=50)
 
-        btn_opcion1 = tk.Button(self, text="Opción 1", command=self.abrir_ventana_opcion1)
-        btn_opcion1.pack(pady=5)
+        # Cargar imágenes con PIL y ImageTk
+        imagen_libro = Image.open(r"C:\Users\giane\OneDrive\Escritorio\SistemaInventario\image\libro.png")
+        imagen_libro = imagen_libro.resize((300, 300))  # Redimensionar la imagen
+        imagen_libro = ImageTk.PhotoImage(imagen_libro)
 
-        btn_opcion2 = tk.Button(self, text="Opción 2", command=self.abrir_ventana_opcion2)
-        btn_opcion2.pack(pady=5)
+        imagen_pelicula = Image.open(r"C:\Users\giane\OneDrive\Escritorio\SistemaInventario\image\pelicula.png")
+        imagen_pelicula = imagen_pelicula.resize((300, 300))  # Redimensionar la imagen
+        imagen_pelicula = ImageTk.PhotoImage(imagen_pelicula)
 
-        self.ventanas_secundarias_abiertas = 0  # Variable para contar las ventanas secundarias abiertas
+        # Botón Opción 1
+        btn_opcion1 = tk.Button(frame_botones, image=imagen_libro, compound=tk.TOP, text="Libros", command=self.abrir_ventana_opcion1)
+        btn_opcion1.image = imagen_libro  # Asignar imagen al botón
+        btn_opcion1.pack(side=tk.LEFT, padx=50, pady=50, anchor=tk.CENTER)
+
+        # Botón Opción 2
+        btn_opcion2 = tk.Button(frame_botones, image=imagen_pelicula, compound=tk.TOP, text="Películas", command=self.abrir_ventana_opcion2)
+        btn_opcion2.image = imagen_pelicula  # Asignar imagen al botón
+        btn_opcion2.pack(side=tk.RIGHT, padx=50, pady=50, anchor=tk.CENTER)
+
+        self.ventanas_secundarias_abiertas = 0
 
     def abrir_ventana_opcion1(self):
         self.withdraw()  # Oculta la pantalla principal
@@ -45,7 +63,7 @@ class VentanaOpcion1(tk.Toplevel):
     def __init__(self, master):
         super().__init__(master)
         self.title("Ventana Opción 1")
-        self.geometry("300x150")
+        self.state('zoomed')
 
         self.create_widgets()
 
@@ -57,14 +75,14 @@ class VentanaOpcion1(tk.Toplevel):
         btn_regresar.pack(pady=5)
 
     def regresar_pantalla_principal(self):
-        self.master.deiconify()  # Vuelve a mostrar la pantalla principal
+        self.master.state('zoomed')
         self.destroy()
 
 class VentanaOpcion2(tk.Toplevel):
     def __init__(self, master):
         super().__init__(master)
         self.title("Ventana Opción 2")
-        self.geometry("300x150")
+        self.state('zoomed')
 
         self.create_widgets()
 
@@ -76,7 +94,7 @@ class VentanaOpcion2(tk.Toplevel):
         btn_regresar.pack(pady=5)
 
     def regresar_pantalla_principal(self):
-        self.master.deiconify()  # Vuelve a mostrar la pantalla principal
+        self.master.state('zoomed')
         self.destroy()
 
 if __name__ == "__main__":
